@@ -1,0 +1,83 @@
+/* OutcomeDisplay Styles */
+
+.outcome-display {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(5px);
+    z-index: 100;
+    animation: fade-in 0.3s ease-out;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.outcome-badge {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: bounce-in 0.5s ease-out;
+}
+
+.outcome-badge.correct {
+    background: linear-gradient(135deg, rgba(123, 196, 127, 0.3) 0%, rgba(123, 196, 127, 0.1) 100%);
+    box-shadow: 0 0 50px rgba(123, 196, 127, 0.5);
+}
+
+.outcome-badge.try-again {
+    background: linear-gradient(135deg, rgba(107, 155, 209, 0.3) 0%, rgba(107, 155, 209, 0.1) 100%);
+    box-shadow: 0 0 50px rgba(107, 155, 209, 0.5);
+}
+
+.outcome-icon {
+    font-size: 5rem;
+    animation: float 2s ease-in-out infinite;
+}
+
+.confetti-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.confetti-piece {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    animation: confetti-fall 2s ease-out forwards;
+}
+
+@keyframes confetti-fall {
+    0% {
+        top: -10%;
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+    }
+
+    100% {
+        top: 110%;
+        opacity: 0;
+        transform: rotate(720deg) scale(0.5);
+    }
+}

@@ -1,0 +1,1114 @@
+/* AnimationPlayer Styles */
+
+.animation-player {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.animation-stage {
+    aspect-ratio: 4/3;
+    background: linear-gradient(180deg, #87CEEB 0%, #E0F4FF 100%);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+    position: relative;
+}
+
+.pause-indicator {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: pulse-soft 1.5s ease-in-out infinite;
+}
+
+.pause-icon {
+    font-size: 4rem;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+/* Ball Animation Styles */
+.ball-scene {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: linear-gradient(180deg, #87CEEB 0%, #87CEEB 60%, #90EE90 60%);
+}
+
+.grass {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 40%;
+    background: linear-gradient(180deg, #7CCD7C 0%, #4A8B4A 100%);
+}
+
+.ball {
+    position: absolute;
+    bottom: 42%;
+    left: 10%;
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle at 30% 30%, #FF6B6B, #CC5555);
+    border-radius: 50%;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.ball-pattern {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    width: 80%;
+    height: 2px;
+    background: white;
+    transform: translateY(-50%);
+}
+
+.ball.ball-rolling {
+    animation: ball-roll 2s ease-out forwards;
+}
+
+.ball.ball-paused {
+    transform: translateX(200px) rotate(360deg);
+}
+
+.ball.ball-rolling-complete {
+    animation: ball-roll-complete 1.5s ease-out forwards;
+}
+
+.ball.ball-complete {
+    transform: translateX(350px) rotate(720deg);
+}
+
+/* Light Animation Styles */
+.light-scene {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.room {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, #FFF8E7 0%, #FFE4B5 100%);
+    position: relative;
+    transition: background 0.5s ease;
+}
+
+.ceiling {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 15%;
+    background: #F5F5DC;
+}
+
+.light-fixture {
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.light-bulb {
+    width: 60px;
+    height: 80px;
+    background: radial-gradient(ellipse at center, #FFFACD 0%, #FFE066 100%);
+    border-radius: 50% 50% 60% 60%;
+    margin: 0 auto;
+    box-shadow: 0 0 40px rgba(255, 230, 102, 0.8);
+    transition: all 0.5s ease;
+}
+
+.light-glow {
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(255, 255, 0, 0.3) 0%, transparent 70%);
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: opacity 0.5s ease;
+}
+
+.light-switch {
+    position: absolute;
+    right: 15%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.switch-plate {
+    width: 30px;
+    height: 50px;
+    background: #F5F5DC;
+    border-radius: 5px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.switch-toggle {
+    width: 15px;
+    height: 25px;
+    background: #DDD;
+    border-radius: 3px;
+    transition: transform 0.3s ease;
+}
+
+.switch-toggle.switch-down {
+    transform: translateY(5px);
+}
+
+.light-fixture.light-dimming .light-bulb {
+    animation: light-dim 1s ease-out forwards;
+}
+
+.light-fixture.light-dimming .light-glow {
+    animation: light-dim 1s ease-out forwards;
+}
+
+.light-fixture.light-paused .light-bulb,
+.light-fixture.light-paused .light-glow {
+    opacity: 0.3;
+    filter: brightness(0.3);
+}
+
+.light-fixture.light-turning-off .light-bulb,
+.light-fixture.light-turning-off .light-glow {
+    animation: light-off 0.5s ease-out forwards;
+}
+
+.light-fixture.light-off .light-bulb {
+    opacity: 0.1;
+    filter: brightness(0.1);
+    box-shadow: none;
+}
+
+.light-fixture.light-off .light-glow {
+    opacity: 0;
+}
+
+.light-fixture.light-turning-on .light-bulb,
+.light-fixture.light-turning-on .light-glow {
+    animation: light-on 0.5s ease-out forwards;
+}
+
+/* Door Animation Styles */
+.door-scene {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.wall {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, #F5DEB3 0%, #DEB887 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.door-frame {
+    width: 120px;
+    height: 200px;
+    background: #8B4513;
+    padding: 8px;
+    perspective: 500px;
+}
+
+.door {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #CD853F 0%, #A0522D 100%);
+    transform-origin: left center;
+    transform: perspective(500px) rotateY(-45deg);
+    position: relative;
+    transition: transform 0.5s ease;
+}
+
+.door-handle {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    width: 15px;
+    height: 25px;
+    background: #FFD700;
+    border-radius: 3px;
+}
+
+.door.door-closing {
+    animation: door-close 1.5s ease-out forwards;
+}
+
+.door.door-paused {
+    transform: perspective(500px) rotateY(-15deg);
+}
+
+.door.door-closing-complete {
+    animation: door-fully-close 1s ease-out forwards;
+}
+
+.door.door-opening {
+    animation: door-open 1s ease-out forwards;
+}
+
+.door.door-closed {
+    transform: perspective(500px) rotateY(0deg);
+}
+
+.door.door-open {
+    transform: perspective(500px) rotateY(-60deg);
+}
+
+/* Swing Animation Styles */
+.swing-scene {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: linear-gradient(180deg, #87CEEB 0%, #87CEEB 70%, #90EE90 70%);
+}
+
+.sky {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 70%;
+}
+
+.ground {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 30%;
+    background: linear-gradient(180deg, #7CCD7C 0%, #4A8B4A 100%);
+}
+
+.swing-set {
+    position: absolute;
+    bottom: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.swing-frame {
+    position: relative;
+}
+
+.swing-bar {
+    width: 150px;
+    height: 10px;
+    background: #8B4513;
+    border-radius: 5px;
+}
+
+.swing {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    transform-origin: top center;
+}
+
+.swing-chain {
+    width: 3px;
+    height: 80px;
+    background: #888;
+    position: absolute;
+    top: 0;
+}
+
+.swing-chain.left {
+    left: 10px;
+}
+
+.swing-chain.right {
+    right: 10px;
+}
+
+.swing-seat {
+    width: 60px;
+    height: 10px;
+    background: #8B4513;
+    border-radius: 5px;
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.swing.swing-moving {
+    animation: swing 1.5s ease-in-out infinite;
+}
+
+.swing.swing-paused {
+    transform: translateX(-50%) rotate(-15deg);
+}
+
+.swing.swing-back {
+    animation: swing 1s ease-in-out forwards;
+}
+
+/* Slide Animation Styles */
+.slide-scene {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: linear-gradient(180deg, #87CEEB 0%, #87CEEB 75%, #90EE90 75%);
+}
+
+.slide-structure {
+    position: absolute;
+    bottom: 25%;
+    left: 30%;
+}
+
+.slide-ramp {
+    width: 180px;
+    height: 120px;
+    background: linear-gradient(135deg, #FF6B6B 0%, #CC5555 100%);
+    border-radius: 10px;
+    transform: rotate(-30deg);
+    position: relative;
+}
+
+.slider {
+    font-size: 2rem;
+    position: absolute;
+    top: 10%;
+    left: 10%;
+}
+
+.slider.slider-moving {
+    animation: slide-move 1.5s ease-in forwards;
+}
+
+.slider.slider-paused {
+    top: 35%;
+    left: 35%;
+}
+
+.slider.slider-down {
+    animation: slide-complete 1s ease-in forwards;
+}
+
+.slider.slider-bottom {
+    top: 70%;
+    left: 70%;
+}
+
+@keyframes slide-move {
+    0% {
+        top: 10%;
+        left: 10%;
+    }
+
+    100% {
+        top: 35%;
+        left: 35%;
+    }
+}
+
+@keyframes slide-complete {
+    0% {
+        top: 35%;
+        left: 35%;
+    }
+
+    100% {
+        top: 70%;
+        left: 70%;
+    }
+}
+
+.slide-ground {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 25%;
+    background: linear-gradient(180deg, #7CCD7C 0%, #4A8B4A 100%);
+}
+
+/* Faucet Animation Styles */
+.faucet-scene {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: linear-gradient(180deg, #F5F5DC 0%, #E8E8D0 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sink {
+    position: relative;
+}
+
+.faucet {
+    position: relative;
+    z-index: 2;
+}
+
+.faucet-spout {
+    width: 80px;
+    height: 60px;
+    background: linear-gradient(135deg, #C0C0C0 0%, #808080 100%);
+    border-radius: 10px 10px 0 0;
+    margin: 0 auto;
+}
+
+.faucet-handle {
+    width: 30px;
+    height: 20px;
+    background: #4169E1;
+    border-radius: 5px;
+    margin: 0 auto;
+}
+
+.water {
+    width: 10px;
+    height: 0;
+    background: linear-gradient(180deg, rgba(65, 105, 225, 0.7) 0%, rgba(65, 105, 225, 0.3) 100%);
+    margin: 0 auto;
+    border-radius: 0 0 5px 5px;
+    transition: height 0.5s ease;
+}
+
+.water.water-starting {
+    animation: water-grow 1s ease-out forwards;
+}
+
+.water.water-paused {
+    height: 40px;
+}
+
+.water.water-flowing {
+    animation: water-flow 0.5s ease-out forwards;
+}
+
+.water.water-full {
+    height: 80px;
+}
+
+.water.water-stopped {
+    height: 0;
+}
+
+@keyframes water-grow {
+    0% {
+        height: 0;
+    }
+
+    100% {
+        height: 40px;
+    }
+}
+
+@keyframes water-flow {
+    0% {
+        height: 40px;
+    }
+
+    100% {
+        height: 80px;
+    }
+}
+
+.sink-bowl {
+    width: 150px;
+    height: 80px;
+    background: #F5F5F5;
+    border-radius: 0 0 50% 50%;
+    margin-top: -10px;
+}
+
+/* Bell Animation Styles */
+.bell-scene {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: linear-gradient(180deg, #FFF8DC 0%, #F5DEB3 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bell-mount {
+    position: relative;
+}
+
+.bell {
+    font-size: 5rem;
+    transform-origin: top center;
+}
+
+.bell.bell-swinging {
+    animation: swing 0.5s ease-in-out infinite;
+}
+
+.bell.bell-paused {
+    transform: rotate(-10deg);
+}
+
+.bell.bell-ringing {
+    animation: bell-ring 0.2s ease-in-out 5;
+}
+
+@keyframes bell-ring {
+
+    0%,
+    100% {
+        transform: rotate(-15deg);
+    }
+
+    50% {
+        transform: rotate(15deg);
+    }
+}
+
+.sound-waves {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.wave {
+    position: absolute;
+    border: 3px solid rgba(255, 165, 0, 0.5);
+    border-radius: 50%;
+    animation: wave-expand 1s ease-out infinite;
+}
+
+.wave-1 {
+    width: 80px;
+    height: 80px;
+    top: -40px;
+    left: -40px;
+}
+
+.wave-2 {
+    width: 120px;
+    height: 120px;
+    top: -60px;
+    left: -60px;
+    animation-delay: 0.2s;
+}
+
+.wave-3 {
+    width: 160px;
+    height: 160px;
+    top: -80px;
+    left: -80px;
+    animation-delay: 0.4s;
+}
+
+@keyframes wave-expand {
+    0% {
+        transform: scale(0.5);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* Eraser Animation Styles */
+.eraser-scene {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: linear-gradient(180deg, #F5DEB3 0%, #DEB887 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.blackboard {
+    width: 80%;
+    max-width: 350px;
+}
+
+.board-frame {
+    background: #8B4513;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.board-surface {
+    background: #2F4F4F;
+    padding: 30px;
+    border-radius: 5px;
+    position: relative;
+    min-height: 150px;
+}
+
+.writing {
+    font-size: 3rem;
+    color: white;
+    font-family: 'Comic Sans MS', cursive;
+    transition: opacity 0.5s ease;
+}
+
+.eraser {
+    position: absolute;
+    right: 80%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.eraser-body {
+    width: 60px;
+    height: 30px;
+    background: linear-gradient(135deg, #FFE4B5 0%, #DEB887 100%);
+    border-radius: 5px;
+}
+
+.eraser.eraser-moving {
+    animation: eraser-move 1.5s ease-out forwards;
+}
+
+.eraser.eraser-paused {
+    right: 40%;
+}
+
+.eraser.eraser-wiping {
+    animation: eraser-wipe 1s ease-out forwards;
+}
+
+.eraser.eraser-done {
+    right: 10%;
+}
+
+@keyframes eraser-move {
+    0% {
+        right: 80%;
+    }
+
+    100% {
+        right: 40%;
+    }
+}
+
+@keyframes eraser-wipe {
+    0% {
+        right: 40%;
+    }
+
+    100% {
+        right: 10%;
+    }
+}
+
+/* Pencil Animation Styles */
+.pencil-scene {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: linear-gradient(180deg, #FFF8DC 0%, #F5DEB3 100%);
+}
+
+.desk {
+    position: absolute;
+    top: 40%;
+    width: 100%;
+}
+
+.desk-surface {
+    height: 20px;
+    background: linear-gradient(180deg, #8B4513 0%, #654321 100%);
+}
+
+.pencil {
+    position: absolute;
+    font-size: 3rem;
+    right: 30%;
+    top: -40px;
+    transform: rotate(45deg);
+}
+
+.pencil.pencil-falling {
+    animation: pencil-fall 1.5s ease-in forwards;
+}
+
+.pencil.pencil-paused {
+    top: 5px;
+}
+
+.pencil.pencil-dropping {
+    animation: pencil-drop 0.5s ease-in forwards;
+}
+
+.pencil.pencil-on-floor {
+    top: 120px;
+    transform: rotate(90deg);
+}
+
+@keyframes pencil-fall {
+    0% {
+        top: -40px;
+    }
+
+    100% {
+        top: 5px;
+    }
+}
+
+@keyframes pencil-drop {
+    0% {
+        top: 5px;
+        transform: rotate(45deg);
+    }
+
+    100% {
+        top: 120px;
+        transform: rotate(90deg);
+    }
+}
+
+.floor {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 30%;
+    background: linear-gradient(180deg, #D2B48C 0%, #C4A77D 100%);
+}
+
+/* Generic Scene Styles for New Animations */
+.generic-scene {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.generic-scene .scene-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+}
+
+.doctor-scene .scene-bg {
+    background: linear-gradient(180deg, #E6F0FF 0%, #D4E4FF 100%);
+}
+
+.store-scene .scene-bg {
+    background: linear-gradient(180deg, #E6FFF0 0%, #D4F8E8 100%);
+}
+
+.party-scene .scene-bg {
+    background: linear-gradient(180deg, #FFE6F5 0%, #FFD4EA 100%);
+}
+
+.scene-icon {
+    font-size: 6rem;
+    z-index: 2;
+    transition: all 0.5s ease;
+}
+
+.scene-icon.animating {
+    animation: bounce-gentle 1s ease-in-out infinite;
+}
+
+.scene-icon.complete-anim {
+    animation: success-pop 0.5s ease-out;
+}
+
+.scene-icon.moving-down {
+    animation: move-down 1.5s ease-in-out forwards;
+}
+
+.scene-icon.moving-right {
+    animation: move-right 1.5s ease-out forwards;
+}
+
+.scene-icon.moved-right {
+    transform: translateX(80px);
+}
+
+.scene-element {
+    font-size: 4rem;
+    position: absolute;
+    top: 30%;
+    z-index: 1;
+}
+
+.effect-icon {
+    font-size: 4rem;
+    position: absolute;
+    animation: pop-in 0.4s ease-out;
+    z-index: 3;
+}
+
+.effect-icon.beep {
+    animation: beep-effect 0.3s ease-out 3;
+}
+
+.effect-icon.sparkle {
+    animation: sparkle 1s ease-in-out infinite;
+}
+
+.effect-text {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    background: white;
+    padding: 8px 16px;
+    border-radius: 12px;
+    position: absolute;
+    bottom: 25%;
+    animation: pop-in 0.4s ease-out;
+    box-shadow: var(--shadow-soft);
+}
+
+/* Balloon specific */
+.balloon-icon.growing {
+    animation: grow-balloon 2s ease-out forwards;
+}
+
+.balloon-icon.popping {
+    animation: pop-balloon 0.3s ease-out forwards;
+}
+
+/* Present specific */
+.present-icon.shaking {
+    animation: shake 0.5s ease-in-out infinite;
+}
+
+.present-icon.opening {
+    animation: open-present 0.5s ease-out forwards;
+}
+
+/* Cake/Candle specific */
+.cake-icon {
+    position: relative;
+}
+
+.flame {
+    font-size: 2rem;
+    position: absolute;
+    top: -20%;
+    animation: flicker 0.3s ease-in-out infinite;
+}
+
+.flame.blowing {
+    animation: blow-out 0.5s ease-out forwards;
+}
+
+.confetti-mini {
+    font-size: 3rem;
+    position: absolute;
+    animation: confetti-pop 1s ease-out infinite;
+}
+
+.falling-items {
+    font-size: 2rem;
+    position: absolute;
+    animation: fall-in 1s ease-out forwards;
+    z-index: 1;
+}
+
+/* Keyframe Animations */
+@keyframes bounce-gentle {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+@keyframes success-pop {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.3);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes move-down {
+    0% {
+        transform: translateY(-50px);
+    }
+
+    100% {
+        transform: translateY(30px);
+    }
+}
+
+@keyframes move-right {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(80px);
+    }
+}
+
+@keyframes pop-in {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes beep-effect {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+@keyframes sparkle {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: rotate(0deg);
+    }
+
+    50% {
+        opacity: 0.5;
+        transform: rotate(180deg);
+    }
+}
+
+@keyframes grow-balloon {
+    0% {
+        transform: scale(0.5);
+    }
+
+    100% {
+        transform: scale(1.2);
+    }
+}
+
+@keyframes pop-balloon {
+    0% {
+        transform: scale(1.2);
+    }
+
+    50% {
+        transform: scale(1.5);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: rotate(-5deg);
+    }
+
+    50% {
+        transform: rotate(5deg);
+    }
+}
+
+@keyframes open-present {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2) rotate(10deg);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes flicker {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.7;
+        transform: scale(0.9);
+    }
+}
+
+@keyframes blow-out {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(0) translateY(-20px);
+    }
+}
+
+@keyframes confetti-pop {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-50px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes fall-in {
+    0% {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+}

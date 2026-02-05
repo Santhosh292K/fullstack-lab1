@@ -1,0 +1,515 @@
+/* Routine Page Styles */
+
+.routine-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #F0E6FF 0%, #E6F0FF 50%, #E6FFF0 100%);
+    padding-bottom: 100px;
+}
+
+.routine-header {
+    padding: var(--space-lg);
+    display: flex;
+    justify-content: center;
+}
+
+.routine-header .page-icon {
+    font-size: 3rem;
+    animation: float 3s ease-in-out infinite;
+}
+
+.routine-content {
+    padding: var(--space-md);
+}
+
+/* View Mode */
+.routine-view {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.routine-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.time-section {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.time-indicator {
+    font-size: 2rem;
+    width: 50px;
+    text-align: center;
+}
+
+.time-items {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+    flex: 1;
+}
+
+.routine-item {
+    width: 70px;
+    height: 70px;
+    border: none;
+    border-radius: var(--radius-md);
+    background: var(--bg-card);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-soft);
+    transition: all var(--transition-fast);
+    position: relative;
+}
+
+.routine-item:hover {
+    transform: scale(1.1);
+    box-shadow: var(--shadow-glow);
+}
+
+.routine-item.selected {
+    background: linear-gradient(135deg, rgba(123, 196, 127, 0.3) 0%, rgba(123, 196, 127, 0.1) 100%);
+    border: 3px solid var(--secondary);
+}
+
+.item-icon {
+    font-size: 2rem;
+}
+
+.item-check {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 24px;
+    height: 24px;
+    background: var(--secondary);
+    border-radius: 50%;
+    color: white;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: bounce-in 0.3s ease-out;
+}
+
+.routine-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-lg);
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+}
+
+.action-btn {
+    width: 70px;
+    height: 70px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+}
+
+.play-btn {
+    background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%);
+    color: white;
+    box-shadow: var(--shadow-card);
+}
+
+.play-btn:hover {
+    transform: scale(1.1);
+    box-shadow: var(--shadow-glow);
+}
+
+.selected-count {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+    max-width: 200px;
+}
+
+.count-icon {
+    font-size: 1.5rem;
+}
+
+.clear-btn {
+    background: rgba(255, 100, 100, 0.2);
+    color: #FF6B6B;
+}
+
+.clear-btn:hover {
+    background: rgba(255, 100, 100, 0.3);
+}
+
+.routine-item {
+    animation: bounce-in 0.4s ease-out backwards;
+}
+
+/* Practice Mode */
+.practice-view {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xl);
+    min-height: 60vh;
+    padding-top: var(--space-lg);
+}
+
+.progress-bar {
+    display: flex;
+    gap: 8px;
+    padding: var(--space-sm);
+}
+
+.progress-step {
+    width: 40px;
+    height: 8px;
+    border-radius: 4px;
+    background: rgba(107, 155, 209, 0.2);
+    transition: all var(--transition-fast);
+}
+
+.progress-step.active {
+    background: var(--primary);
+}
+
+.progress-step.done {
+    background: var(--secondary);
+}
+
+.current-activity {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+}
+
+.nav-arrow {
+    width: 60px;
+    height: 60px;
+    border: none;
+    border-radius: 50%;
+    background: var(--bg-card);
+    cursor: pointer;
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-soft);
+    transition: all var(--transition-fast);
+}
+
+.nav-arrow:hover:not(:disabled) {
+    transform: scale(1.1);
+    box-shadow: var(--shadow-glow);
+}
+
+.nav-arrow:disabled {
+    cursor: not-allowed;
+}
+
+.what-next {
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.next-label {
+    font-size: 1.5rem;
+    opacity: 0.5;
+}
+
+.activity-card {
+    width: 180px;
+    height: 180px;
+    border-radius: var(--radius-lg);
+    background: var(--bg-card);
+    box-shadow: var(--shadow-card);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: bounce-in 0.4s ease-out;
+}
+
+.activity-icon {
+    font-size: 6rem;
+}
+
+.next-preview {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    opacity: 0.5;
+}
+
+.arrow {
+    font-size: 2rem;
+}
+
+.next-icon {
+    font-size: 3rem;
+}
+
+.practice-controls {
+    display: flex;
+    gap: var(--space-lg);
+}
+
+.timer-btn,
+.next-btn {
+    width: 70px;
+    height: 70px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-soft);
+    transition: all var(--transition-fast);
+}
+
+.timer-btn {
+    background: var(--bg-card);
+}
+
+.next-btn {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: white;
+}
+
+.timer-btn:hover,
+.next-btn:hover {
+    transform: scale(1.1);
+    box-shadow: var(--shadow-glow);
+}
+
+/* Practice Complete */
+.practice-complete {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    gap: var(--space-xl);
+}
+
+.complete-celebration {
+    text-align: center;
+}
+
+.celebration-star {
+    font-size: 6rem;
+    animation: float 2s ease-in-out infinite;
+    display: block;
+    margin-bottom: var(--space-lg);
+}
+
+.completed-items {
+    display: flex;
+    gap: var(--space-sm);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.completed-icon {
+    font-size: 2.5rem;
+    animation: bounce-in 0.4s ease-out backwards;
+}
+
+.completed-icon:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.completed-icon:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.completed-icon:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.completed-icon:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.completed-icon:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+.done-btn {
+    width: 80px;
+    height: 80px;
+    border: none;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%);
+    color: white;
+    font-size: 2.5rem;
+    cursor: pointer;
+    box-shadow: var(--shadow-card);
+    transition: all var(--transition-fast);
+}
+
+.done-btn:hover {
+    transform: scale(1.1);
+    box-shadow: var(--shadow-glow);
+}
+
+/* Timer View */
+.timer-view {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    gap: var(--space-xl);
+}
+
+.timer-circle {
+    position: relative;
+    width: 200px;
+    height: 200px;
+}
+
+.timer-svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.timer-bg {
+    fill: none;
+    stroke: rgba(107, 155, 209, 0.2);
+    stroke-width: 8;
+}
+
+.timer-progress {
+    fill: none;
+    stroke: var(--primary);
+    stroke-width: 8;
+    stroke-linecap: round;
+    transition: stroke-dasharray 1s linear;
+}
+
+.timer-display {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.timer-emoji {
+    font-size: 3rem;
+}
+
+.timer-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.timer-controls {
+    display: flex;
+    gap: var(--space-lg);
+}
+
+.timer-control-btn {
+    width: 60px;
+    height: 60px;
+    border: none;
+    border-radius: 50%;
+    background: var(--bg-card);
+    cursor: pointer;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-soft);
+    transition: all var(--transition-fast);
+}
+
+.timer-control-btn:hover {
+    transform: scale(1.1);
+    box-shadow: var(--shadow-glow);
+}
+
+.timer-done-btn {
+    width: 70px;
+    height: 70px;
+    border: none;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%);
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    box-shadow: var(--shadow-card);
+    transition: all var(--transition-fast);
+}
+
+.timer-done-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Back Button */
+.back-btn {
+    position: fixed;
+    top: var(--space-md);
+    left: var(--space-md);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-soft);
+    transition: all var(--transition-fast);
+    z-index: 10;
+}
+
+.back-btn:hover {
+    transform: scale(1.1);
+    box-shadow: var(--shadow-glow);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .routine-item {
+        width: 60px;
+        height: 60px;
+    }
+
+    .item-icon {
+        font-size: 1.8rem;
+    }
+
+    .activity-card {
+        width: 150px;
+        height: 150px;
+    }
+
+    .activity-icon {
+        font-size: 4rem;
+    }
+}

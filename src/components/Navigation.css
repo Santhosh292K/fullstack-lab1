@@ -1,0 +1,102 @@
+/* Bottom Navigation Styles */
+
+.bottom-navigation {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    padding: var(--space-sm) var(--space-md);
+    padding-bottom: calc(var(--space-sm) + env(safe-area-inset-bottom, 0));
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+    z-index: 100;
+    border-top: 1px solid rgba(107, 155, 209, 0.1);
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: var(--space-sm);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-fast);
+    min-width: 60px;
+    min-height: 60px;
+    position: relative;
+}
+
+.nav-item:hover {
+    background: rgba(107, 155, 209, 0.1);
+}
+
+.nav-item.active {
+    background: rgba(107, 155, 209, 0.15);
+}
+
+.nav-icon {
+    font-size: 1.8rem;
+    line-height: 1;
+    transition: transform var(--transition-fast);
+}
+
+.nav-item:hover .nav-icon {
+    transform: scale(1.1);
+}
+
+.nav-item.active .nav-icon {
+    transform: scale(1.15);
+}
+
+.nav-indicator {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--primary);
+    margin-top: 4px;
+    opacity: 0;
+    transform: scale(0);
+    transition: all var(--transition-fast);
+}
+
+.nav-item.active .nav-indicator {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* High contrast mode */
+.high-contrast .bottom-navigation {
+    background: #000;
+    border-top: 2px solid #fff;
+}
+
+.high-contrast .nav-item {
+    color: #fff;
+}
+
+.high-contrast .nav-item.active {
+    background: #333;
+}
+
+.high-contrast .nav-indicator {
+    background: #fff;
+}
+
+/* Responsive */
+@media (max-width: 400px) {
+    .nav-item {
+        min-width: 50px;
+        padding: var(--space-xs);
+    }
+
+    .nav-icon {
+        font-size: 1.5rem;
+    }
+}
