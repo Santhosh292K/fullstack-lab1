@@ -359,117 +359,231 @@ const PencilAnimation = ({ phase }) => {
 };
 
 // Doctor - Stethoscope Animation
-const StethoscopeAnimation = ({ phase }) => (
-    <div className="generic-scene doctor-scene">
-        <div className="scene-bg"></div>
-        <div className={`scene-icon ${phase === 'initial' ? 'animating' : ''} ${phase === 'completing' || phase === 'complete' ? 'complete-anim' : ''}`}>
-            🩺
+const StethoscopeAnimation = ({ phase, choice }) => {
+    const isMusic = choice?.id === 'music';
+    const isSilence = choice?.id === 'silence';
+    const isHeartbeat = choice?.id === 'heartbeat' || (!choice && phase !== 'initial');
+
+    return (
+        <div className="generic-scene doctor-scene">
+            <div className="scene-bg"></div>
+            <div className="scene-element">👕</div>
+            <div className={`scene-icon stethoscope-icon ${phase === 'initial' ? 'animating' : 'moving-to-chest'}`}>
+                🩺
+            </div>
+            {(phase === 'completing' || phase === 'complete') && (
+                <>
+                    {isHeartbeat && <div className="effect-icon heart-beat">💓</div>}
+                    {isMusic && <div className="effect-icon music-notes">🎵</div>}
+                    {isSilence && <div className="effect-icon">🔇</div>}
+                </>
+            )}
         </div>
-        {(phase === 'completing' || phase === 'complete') && (
-            <div className="effect-icon">💓</div>
-        )}
-    </div>
-);
+    );
+};
 
 // Doctor - Thermometer Animation
-const ThermometerAnimation = ({ phase }) => (
-    <div className="generic-scene doctor-scene">
-        <div className="scene-bg"></div>
-        <div className={`scene-icon ${phase === 'initial' ? 'animating' : ''} ${phase === 'completing' || phase === 'complete' ? 'complete-anim' : ''}`}>
-            🌡️
+const ThermometerAnimation = ({ phase, choice }) => {
+    const isBlank = choice?.id === 'nothing';
+    const isColors = choice?.id === 'colors';
+    const isNumber = choice?.id === 'number' || (!choice && phase !== 'initial');
+
+    return (
+        <div className="generic-scene doctor-scene">
+            <div className="scene-bg"></div>
+            <div className="scene-element">🙂</div>
+            <div className={`scene-icon thermometer-icon ${phase === 'initial' ? 'animating' : 'checking'}`}>
+                🌡️
+            </div>
+            {(phase === 'completing' || phase === 'complete') && (
+                <>
+                    {isNumber && <div className="effect-text">37°</div>}
+                    {isBlank && <div className="effect-text">--</div>}
+                    {isColors && <div className="effect-text temp-colors">🌈</div>}
+                </>
+            )}
         </div>
-        {(phase === 'completing' || phase === 'complete') && (
-            <div className="effect-text">37°</div>
-        )}
-    </div>
-);
+    );
+};
 
 // Doctor - Bandage Animation
-const BandageAnimation = ({ phase }) => (
-    <div className="generic-scene doctor-scene">
-        <div className="scene-bg"></div>
-        <div className="scene-element">🤕</div>
-        <div className={`scene-icon bandage-icon ${phase === 'initial' ? 'animating moving-down' : ''} ${phase === 'completing' || phase === 'complete' ? 'complete-anim' : ''}`}>
-            🩹
+const BandageAnimation = ({ phase, choice }) => {
+    const isFall = choice?.id === 'fall';
+    const isFly = choice?.id === 'fly';
+    const isStick = choice?.id === 'stick' || (!choice && phase !== 'initial');
+
+    const getBandageClass = () => {
+        if (phase === 'initial') return 'animating';
+        if (isFall) return 'falling';
+        if (isFly) return 'flying';
+        return 'complete-anim';
+    };
+
+    return (
+        <div className="generic-scene doctor-scene">
+            <div className="scene-bg"></div>
+            <div className="scene-element">🤕</div>
+            <div className={`scene-icon bandage-icon ${getBandageClass()}`}>
+                🩹
+            </div>
         </div>
-    </div>
-);
+    );
+};
 
 // Store - Cart Animation
-const CartAnimation = ({ phase }) => (
-    <div className="generic-scene store-scene">
-        <div className="scene-bg"></div>
-        <div className={`scene-icon ${phase === 'initial' ? 'animating moving-right' : ''} ${phase === 'completing' || phase === 'complete' ? 'complete-anim moved-right' : ''}`}>
-            🛒
+const CartAnimation = ({ phase, choice }) => {
+    const isBackward = choice?.id === 'backward';
+    const isSpin = choice?.id === 'spin';
+    const isForward = choice?.id === 'forward' || (!choice && phase !== 'initial');
+
+    const getCartClass = () => {
+        if (phase === 'initial') return 'animating';
+        if (isBackward) return 'moving-backward';
+        if (isSpin) return 'spinning';
+        return 'moving-forward';
+    };
+
+    return (
+        <div className="generic-scene store-scene">
+            <div className="scene-bg"></div>
+            <div className={`scene-icon cart-icon ${getCartClass()}`}>
+                🛒
+            </div>
         </div>
-    </div>
-);
+    );
+};
 
 // Store - Scanner Animation
-const ScannerAnimation = ({ phase }) => (
-    <div className="generic-scene store-scene">
-        <div className="scene-bg"></div>
-        <div className="scene-element">📦</div>
-        <div className={`scene-icon ${phase === 'initial' ? 'animating' : ''}`}>
-            📱
+const ScannerAnimation = ({ phase, choice }) => {
+    const isQuiet = choice?.id === 'quiet';
+    const isExplode = choice?.id === 'explode';
+    const isBeep = choice?.id === 'beep' || (!choice && phase !== 'initial');
+
+    return (
+        <div className="generic-scene store-scene">
+            <div className="scene-bg"></div>
+            <div className="scanner-machine">📟</div>
+            <div className={`scanner-item ${phase !== 'initial' ? 'scanning' : ''}`}>
+                📦
+            </div>
+            <div className={`scene-icon ${phase === 'initial' ? 'animating' : ''}`}>
+                📱
+            </div>
+            {(phase === 'completing' || phase === 'complete') && (
+                <>
+                    {isBeep && <div className="effect-icon beep">📢</div>}
+                    {isQuiet && <div className="effect-icon">🔇</div>}
+                    {isExplode && <div className="effect-icon explosion">💥</div>}
+                </>
+            )}
         </div>
-        {(phase === 'completing' || phase === 'complete') && (
-            <div className="effect-icon beep">📢</div>
-        )}
-    </div>
-);
+    );
+};
 
 // Store - Bag Animation
-const BagAnimation = ({ phase }) => (
-    <div className="generic-scene store-scene">
-        <div className="scene-bg"></div>
-        <div className={`scene-icon bag-icon ${phase === 'initial' ? 'animating' : ''} ${phase === 'completing' || phase === 'complete' ? 'bag-full' : ''}`}>
-            {phase === 'complete' ? '🛍️' : '👜'}
+const BagAnimation = ({ phase, choice }) => {
+    const isEmpty = choice?.id === 'empty';
+    const isBreak = choice?.id === 'break';
+    const isFull = choice?.id === 'full' || (!choice && phase !== 'initial');
+
+    return (
+        <div className="generic-scene store-scene">
+            <div className="scene-bg"></div>
+            <div className={`scene-icon bag-icon ${phase === 'initial' ? 'animating' : ''} ${isBreak ? 'breaking' : ''}`}>
+                {isBreak ? '💔' : (phase === 'complete' || isFull) ? '🛍️' : '👜'}
+            </div>
+            {phase === 'initial' && <div className="falling-items">🍎</div>}
+
+            {/* Outcomes */}
+            {(phase === 'completing' || phase === 'complete') && (
+                <>
+                    {isFull && <div className="falling-items">🥖</div>}
+                    {isEmpty && <div className="effect-icon">💨</div>}
+                    {isBreak && <div className="spilled-items">🍎 🥖 🥛</div>}
+                </>
+            )}
         </div>
-        {phase === 'initial' && <div className="falling-items">🍎</div>}
-        {phase === 'completing' && <div className="falling-items">🥖</div>}
-    </div>
-);
+    );
+};
 
 // Party - Candle Animation
-const CandleAnimation = ({ phase }) => (
-    <div className="generic-scene party-scene">
-        <div className="scene-bg"></div>
-        <div className="scene-icon cake-icon">🎂</div>
-        {phase !== 'complete' && (
-            <div className={`flame ${phase === 'completing' ? 'blowing' : ''}`}>🔥</div>
-        )}
-        {phase === 'complete' && (
-            <div className="effect-icon">💨</div>
-        )}
-    </div>
-);
+const CandleAnimation = ({ phase, choice }) => {
+    const isBigger = choice?.id === 'bigger';
+    const isStay = choice?.id === 'stay';
+    const isOut = choice?.id === 'out' || (!choice && phase !== 'initial');
+
+    return (
+        <div className="generic-scene party-scene">
+            <div className="scene-bg"></div>
+            <div className="scene-icon cake-icon">🎂</div>
+            {isOut && phase !== 'complete' && (
+                <div className={`flame ${phase === 'completing' ? 'blowing' : ''}`}>🔥</div>
+            )}
+            {isOut && phase === 'complete' && (
+                <div className="effect-icon">💨</div>
+            )}
+
+            {(isStay || phase === 'initial') && !isBigger && !isOut && (
+                <div className="flame">🔥</div>
+            )}
+
+            {isBigger && (phase === 'completing' || phase === 'complete') && (
+                <div className="flame growing-big">🔥</div>
+            )}
+        </div>
+    );
+};
 
 // Party - Balloon Animation
-const BalloonAnimation = ({ phase }) => (
-    <div className="generic-scene party-scene">
-        <div className="scene-bg"></div>
-        <div className={`scene-icon balloon-icon ${phase === 'initial' ? 'growing' : ''} ${phase === 'completing' ? 'popping' : ''}`}>
-            {phase === 'complete' ? '💥' : '🎈'}
+const BalloonAnimation = ({ phase, choice }) => {
+    const isFloat = choice?.id === 'float';
+    const isShrink = choice?.id === 'shrink';
+    const isPop = choice?.id === 'pop' || (!choice && phase !== 'initial');
+
+    const getBalloonClass = () => {
+        if (phase === 'initial') return 'growing';
+        if (isFloat) return 'floating';
+        if (isShrink) return 'shrinking';
+        return 'popping';
+    };
+
+    return (
+        <div className="generic-scene party-scene">
+            <div className="scene-bg"></div>
+            <div className={`scene-icon balloon-icon ${getBalloonClass()}`}>
+                {phase === 'complete' && isPop ? '💥' : '🎈'}
+            </div>
+            {phase === 'complete' && isPop && (
+                <div className="confetti-mini">🎊</div>
+            )}
         </div>
-        {phase === 'complete' && (
-            <div className="confetti-mini">🎊</div>
-        )}
-    </div>
-);
+    );
+};
 
 // Party - Present Animation
-const PresentAnimation = ({ phase }) => (
-    <div className="generic-scene party-scene">
-        <div className="scene-bg"></div>
-        <div className={`scene-icon present-icon ${phase === 'initial' ? 'shaking' : ''} ${phase === 'completing' ? 'opening' : ''}`}>
-            {phase === 'complete' ? '🧸' : '🎁'}
+const PresentAnimation = ({ phase, choice }) => {
+    const isNothing = choice?.id === 'nothing';
+    const isAnimal = choice?.id === 'animal';
+    const isToy = choice?.id === 'toy' || (!choice && phase !== 'initial');
+
+    return (
+        <div className="generic-scene party-scene">
+            <div className="scene-bg"></div>
+            <div className={`scene-icon present-icon ${phase === 'initial' ? 'shaking' : 'opening'}`}>
+                {phase === 'complete' ? (isNothing ? '📦' : '🎁') : '🎁'}
+            </div>
+
+            {(phase === 'completing' || phase === 'complete') && (
+                <>
+                    {isToy && <div className="present-contents">🧸</div>}
+                    {isAnimal && <div className="present-contents">🐕</div>}
+                    {isNothing && <div className="effect-icon">🕸️</div>}
+                    {isToy && <div className="effect-icon sparkle">✨</div>}
+                </>
+            )}
         </div>
-        {phase === 'complete' && (
-            <div className="effect-icon sparkle">✨</div>
-        )}
-    </div>
-);
+    );
+};
 
 // Generic Animation (fallback with icon)
 const GenericAnimation = ({ phase, icon }) => (

@@ -82,43 +82,64 @@
 
 .scenarios-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: var(--space-md);
-    max-width: 500px;
+    max-width: 900px;
     width: 100%;
 }
 
 .scenario-card {
-    aspect-ratio: 1;
+    /* removed fixed aspect ratio */
+    min-height: 180px;
     border: none;
     border-radius: var(--radius-md);
     background: var(--bg-card);
     cursor: pointer;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     box-shadow: var(--shadow-soft);
     transition: all var(--transition-fast);
     animation: bounce-in 0.4s ease-out backwards;
+    padding: var(--space-md);
+    text-align: center;
 }
 
 .scenario-card:hover {
-    transform: scale(1.08) translateY(-5px);
+    transform: translateY(-5px);
     box-shadow: var(--shadow-glow);
 }
 
 .scenario-card:active {
-    transform: scale(0.95);
+    transform: scale(0.98);
 }
 
 .scenario-preview {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    margin-bottom: var(--space-sm);
 }
 
 .scenario-icon {
-    font-size: 3.5rem;
+    font-size: 3rem;
+}
+
+.scenario-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.scenario-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin: 0;
+}
+
+.scenario-desc {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin: 0;
 }
 
 .choice-section {
@@ -194,12 +215,29 @@
 /* Responsive */
 @media (max-width: 480px) {
     .scenarios-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: var(--space-sm);
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+    }
+
+    .scenario-card {
+        flex-direction: row;
+        text-align: left;
+        padding: var(--space-md);
+        justify-content: flex-start;
+        gap: var(--space-md);
+        min-height: auto;
+    }
+
+    .scenario-preview {
+        margin-bottom: 0;
     }
 
     .scenario-icon {
         font-size: 2.5rem;
+    }
+
+    .scenario-info {
+        align-items: flex-start;
     }
 
     .action-buttons .btn {

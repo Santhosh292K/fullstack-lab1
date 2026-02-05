@@ -117,6 +117,10 @@ const ScenarioPage = ({ locationId, onBack, customScenarios }) => {
                                 <div className="scenario-preview">
                                     {getScenarioIcon(scenario.animationType)}
                                 </div>
+                                <div className="scenario-info">
+                                    <h3 className="scenario-title">{scenario.title}</h3>
+                                    <p className="scenario-desc">{scenario.description}</p>
+                                </div>
                             </button>
                         ))}
                     </div>
