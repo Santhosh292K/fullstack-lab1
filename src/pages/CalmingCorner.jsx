@@ -10,11 +10,12 @@ const scenes = [
 ];
 
 const CalmingCorner = () => {
-    const [mode, setMode] = useState('menu'); // menu, scene, timer, squeeze
+    const [mode, setMode] = useState('menu'); // menu, scene, timer
     const [selectedScene, setSelectedScene] = useState(null);
     const [timerSeconds, setTimerSeconds] = useState(60);
     const [timerActive, setTimerActive] = useState(false);
-    const [squeezeActive, setSqueezeActive] = useState(false);
+    // Bug 1 fix: track the selected duration so progress bar calculates correctly
+    const [timerDuration, setTimerDuration] = useState(60);
     const [squeezeScale, setSqueezeScale] = useState(1);
 
     // Timer logic
@@ -35,21 +36,22 @@ const CalmingCorner = () => {
         setMode('scene');
     };
 
+    // Bug 1 fix: also set timerDuration so progress is correct
     const startTimer = useCallback((seconds) => {
+        setTimerDuration(seconds);
         setTimerSeconds(seconds);
         setTimerActive(true);
         setMode('timer');
     }, []);
 
-    const handleSqueezeStart = () => {
-        setSqueezeActive(true);
-        setSqueezeScale(0.8);
-    };
+    const handleSqueezeStart = () => setSqueezeScale(0.8);
+    const handleSqueezeEnd = () => setSqueezeScale(1);
 
-    const handleSqueezeEnd = () => {
-        setSqueezeActive(false);
-        setSqueezeScale(1);
-    };
+    const timerOptions = [
+        { seconds: 30, label: '30s' },
+        { seconds: 60, label: '1 min' },
+        { seconds: 120, label: '2 min' },
+    ];
 
     const renderMenu = () => (
         <div className="calming-menu">
@@ -63,6 +65,7 @@ const CalmingCorner = () => {
                             style={{ animationDelay: `${index * 0.1}s` }}
                         >
                             <span className="scene-emoji">{scene.icon}</span>
+                            <span className="scene-name">{scene.name}</span>
                         </button>
                     ))}
                 </div>
@@ -70,18 +73,14 @@ const CalmingCorner = () => {
 
             <div className="menu-section">
                 <div className="timer-options">
-                    {[30, 60, 120].map((seconds) => (
+                    {timerOptions.map(({ seconds, label }) => (
                         <button
                             key={seconds}
                             className="timer-option"
                             onClick={() => startTimer(seconds)}
                         >
                             <span className="timer-icon">⏱️</span>
-                            <span className="timer-dots">
-                                {[...Array(seconds / 30)].map((_, i) => (
-                                    <span key={i} className="dot">•</span>
-                                ))}
-                            </span>
+                            <span className="timer-option-label">{label}</span>
                         </button>
                     ))}
                 </div>
@@ -121,9 +120,13 @@ const CalmingCorner = () => {
     );
 
     const renderTimer = () => {
-        const progress = (timerSeconds / 60) * 100;
+        // Bug 1 fix: use timerDuration (not hardcoded 60) so progress is always correct
+        const progress = timerDuration > 0 ? (timerSeconds / timerDuration) * 100 : 0;
         const minutes = Math.floor(timerSeconds / 60);
-        const seconds = timerSeconds % 60;
+        const secs = timerSeconds % 60;
+        const display = minutes > 0
+            ? `${minutes}:${secs.toString().padStart(2, '0')}`
+            : `${timerSeconds}`;
 
         return (
             <div className="timer-view">
@@ -149,6 +152,7 @@ const CalmingCorner = () => {
                         <span className="timer-emoji">
                             {timerSeconds > 0 ? '⏳' : '⭐'}
                         </span>
+                        <span className="timer-number">{display}</span>
                     </div>
                 </div>
 

@@ -2,18 +2,18 @@ import { useState, useEffect } from 'react';
 import './RoutinePage.css';
 
 const routineItems = [
-    { id: 'wake', icon: '🌅', time: 'morning' },
-    { id: 'brush', icon: '🪥', time: 'morning' },
-    { id: 'breakfast', icon: '🥣', time: 'morning' },
-    { id: 'dress', icon: '👕', time: 'morning' },
-    { id: 'school', icon: '🏫', time: 'day' },
-    { id: 'lunch', icon: '🍽️', time: 'day' },
-    { id: 'play', icon: '⚽', time: 'afternoon' },
-    { id: 'homework', icon: '📚', time: 'afternoon' },
-    { id: 'dinner', icon: '🍝', time: 'evening' },
-    { id: 'bath', icon: '🛁', time: 'evening' },
-    { id: 'stories', icon: '📖', time: 'evening' },
-    { id: 'sleep', icon: '😴', time: 'night' },
+    { id: 'wake', icon: '🌅', label: 'Wake Up', time: 'morning' },
+    { id: 'brush', icon: '🪥', label: 'Brush Teeth', time: 'morning' },
+    { id: 'breakfast', icon: '🥣', label: 'Breakfast', time: 'morning' },
+    { id: 'dress', icon: '👕', label: 'Get Dressed', time: 'morning' },
+    { id: 'school', icon: '🏫', label: 'School', time: 'day' },
+    { id: 'lunch', icon: '🍽️', label: 'Lunch', time: 'day' },
+    { id: 'play', icon: '⚽', label: 'Play Time', time: 'afternoon' },
+    { id: 'homework', icon: '📚', label: 'Homework', time: 'afternoon' },
+    { id: 'dinner', icon: '🍝', label: 'Dinner', time: 'evening' },
+    { id: 'bath', icon: '🛁', label: 'Bath', time: 'evening' },
+    { id: 'stories', icon: '📖', label: 'Story Time', time: 'evening' },
+    { id: 'sleep', icon: '😴', label: 'Sleep', time: 'night' },
 ];
 
 const RoutinePage = () => {
@@ -62,7 +62,7 @@ const RoutinePage = () => {
         setMode('timer');
     };
 
-    // Timer effect - fixed with useEffect
+    // Timer effect
     useEffect(() => {
         let interval;
         if (timerActive && timerSeconds > 0) {
@@ -98,6 +98,7 @@ const RoutinePage = () => {
                                         style={{ animationDelay: `${index * 0.1}s` }}
                                     >
                                         <span className="item-icon">{item.icon}</span>
+                                        <span className="item-label">{item.label}</span>
                                         {selectedRoutines.find(r => r.id === item.id) && (
                                             <span className="item-check">✓</span>
                                         )}
@@ -179,6 +180,7 @@ const RoutinePage = () => {
 
                     <div className="activity-card">
                         <span className="activity-icon">{currentItem?.icon}</span>
+                        <span className="activity-label">{currentItem?.label}</span>
                     </div>
 
                     <button
@@ -202,13 +204,13 @@ const RoutinePage = () => {
 
                 <div className="practice-controls">
                     <button className="timer-btn" onClick={() => startTimer(60)}>
-                        ⏱️ 1
+                        ⏱️ 1m
                     </button>
                     <button className="timer-btn" onClick={() => startTimer(120)}>
-                        ⏱️ 2
+                        ⏱️ 2m
                     </button>
                     <button className="timer-btn" onClick={() => startTimer(180)}>
-                        ⏱️ 3
+                        ⏱️ 3m
                     </button>
                 </div>
 

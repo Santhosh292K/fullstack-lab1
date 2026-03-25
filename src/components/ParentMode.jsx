@@ -110,6 +110,7 @@ const ParentMode = ({
                                 </div>
                                 <div className="form-group">
                                     <label>Location</label>
+                                    {/* Bug 5 fix: all 6 locations included */}
                                     <select
                                         value={newScenario.locationId}
                                         onChange={(e) => setNewScenario({ ...newScenario, locationId: e.target.value })}
@@ -117,19 +118,36 @@ const ParentMode = ({
                                         <option value="home">🏠 Home</option>
                                         <option value="park">🌳 Park</option>
                                         <option value="classroom">📚 Classroom</option>
+                                        <option value="doctor">🏥 Doctor</option>
+                                        <option value="store">🛒 Store</option>
+                                        <option value="party">🎂 Party</option>
                                     </select>
                                 </div>
                                 <div className="form-group">
                                     <label>Animation Type</label>
+                                    {/* Bug 6 fix: all 18 animation types included */}
                                     <select
                                         value={newScenario.animationType}
                                         onChange={(e) => setNewScenario({ ...newScenario, animationType: e.target.value })}
                                     >
-                                        <option value="ball">⚽ Ball</option>
-                                        <option value="light">💡 Light</option>
-                                        <option value="door">🚪 Door</option>
+                                        <option value="ball">⚽ Ball Rolling</option>
+                                        <option value="light">💡 Light Switch</option>
+                                        <option value="door">🚪 Door Closing</option>
+                                        <option value="faucet">💧 Water Faucet</option>
                                         <option value="swing">🎪 Swing</option>
-                                        <option value="faucet">💧 Faucet</option>
+                                        <option value="slide">🛝 Slide</option>
+                                        <option value="bell">🔔 School Bell</option>
+                                        <option value="eraser">📝 Eraser on Board</option>
+                                        <option value="pencil">✏️ Falling Pencil</option>
+                                        <option value="stethoscope">🩺 Stethoscope</option>
+                                        <option value="thermometer">🌡️ Thermometer</option>
+                                        <option value="bandage">🩹 Bandage</option>
+                                        <option value="cart">🛒 Shopping Cart</option>
+                                        <option value="scanner">📱 Item Scanner</option>
+                                        <option value="bag">👜 Filling Bag</option>
+                                        <option value="candle">🕯️ Birthday Candles</option>
+                                        <option value="balloon">🎈 Balloon</option>
+                                        <option value="present">🎁 Opening Gift</option>
                                     </select>
                                 </div>
                                 <button className="btn btn-primary" onClick={handleAddScenario}>
@@ -158,7 +176,7 @@ const ParentMode = ({
 
                     {activeTab === 'info' && (
                         <div className="info-tab">
-                            <h3>About Control & Predict</h3>
+                            <h3>About Control &amp; Predict</h3>
                             <p>
                                 This app helps children learn to predict outcomes through
                                 simple animations. The pause → predict → play flow builds
@@ -166,7 +184,7 @@ const ParentMode = ({
                             </p>
                             <h4>How to Use</h4>
                             <ul>
-                                <li>Select a location (Home, Park, or Classroom)</li>
+                                <li>Select a location (Home, Park, Classroom, Doctor, Store, or Party)</li>
                                 <li>Watch the animation begin</li>
                                 <li>When it pauses, choose what happens next</li>
                                 <li>Watch the animation complete</li>

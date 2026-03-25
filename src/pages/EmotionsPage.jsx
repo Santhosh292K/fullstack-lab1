@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import { useSettings } from '../context/SettingsContext';
 import './EmotionsPage.css';
 
@@ -21,6 +21,9 @@ const EmotionsPage = () => {
     const [showFeedback, setShowFeedback] = useState(false);
     const [breathPhase, setBreathPhase] = useState('inhale');
     const [breathCount, setBreathCount] = useState(0);
+
+    // Bug 3 fix: use a ref to cancel breathing cycle when navigating away
+    const breathingAbort = useRef(false);
 
     const startMatchGame = useCallback(() => {
         const randomEmotion = emotions[Math.floor(Math.random() * emotions.length)];
@@ -55,35 +58,55 @@ const EmotionsPage = () => {
     };
 
     const startBreathing = () => {
+        breathingAbort.current = false;
         setMode('breathing');
         setBreathPhase('inhale');
         setBreathCount(0);
-        runBreathingCycle();
     };
 
-    const runBreathingCycle = () => {
+    // Bug 3 fix: Effect-driven breathing cycle with abort support
+    useEffect(() => {
+        if (mode !== 'breathing') {
+            breathingAbort.current = true;
+            return;
+        }
+
+        breathingAbort.current = false;
         let count = 0;
+
         const cycle = () => {
+            if (breathingAbort.current) return;
             if (count >= 3) {
                 setMode('menu');
                 return;
             }
 
             setBreathPhase('inhale');
-            setTimeout(() => {
+            const t1 = setTimeout(() => {
+                if (breathingAbort.current) return;
                 setBreathPhase('hold');
-                setTimeout(() => {
+                const t2 = setTimeout(() => {
+                    if (breathingAbort.current) return;
                     setBreathPhase('exhale');
-                    setTimeout(() => {
+                    const t3 = setTimeout(() => {
+                        if (breathingAbort.current) return;
                         count++;
                         setBreathCount(count);
                         cycle();
                     }, 4000);
+                    return () => clearTimeout(t3);
                 }, 2000);
+                return () => clearTimeout(t2);
             }, 4000);
+            return () => clearTimeout(t1);
         };
+
         cycle();
-    };
+
+        return () => {
+            breathingAbort.current = true;
+        };
+    }, [mode]);
 
     const renderMenu = () => (
         <div className="emotions-menu">
@@ -93,6 +116,7 @@ const EmotionsPage = () => {
                     onClick={startMatchGame}
                 >
                     <span className="menu-icon">🎯</span>
+                    <span className="menu-card-label">Match Emotions</span>
                     <span className="menu-dots">
                         {emotions.slice(0, 4).map(e => (
                             <span key={e.id} className="emotion-dot">{e.emoji}</span>
@@ -105,6 +129,7 @@ const EmotionsPage = () => {
                     onClick={() => setMode('selfcheck')}
                 >
                     <span className="menu-icon">💭</span>
+                    <span className="menu-card-label">How Do I Feel?</span>
                     <span className="menu-subtitle">❓</span>
                 </button>
 
@@ -113,6 +138,7 @@ const EmotionsPage = () => {
                     onClick={startBreathing}
                 >
                     <span className="menu-icon">🌬️</span>
+                    <span className="menu-card-label">Breathing</span>
                     <span className="breathing-indicator">
                         <span className="breath-circle"></span>
                     </span>
@@ -138,10 +164,10 @@ const EmotionsPage = () => {
                     <button
                         key={emotion.id}
                         className={`emotion-choice ${selectedEmotion?.id === emotion.id
-                                ? emotion.id === targetEmotion?.id
-                                    ? 'correct'
-                                    : 'incorrect'
-                                : ''
+                            ? emotion.id === targetEmotion?.id
+                                ? 'correct'
+                                : 'incorrect'
+                            : ''
                             }`}
                         onClick={() => handleEmotionSelect(emotion)}
                         disabled={showFeedback}
@@ -151,6 +177,7 @@ const EmotionsPage = () => {
                         }}
                     >
                         <span className="choice-emoji">{emotion.emoji}</span>
+                        <span className="choice-name">{emotion.name}</span>
                     </button>
                 ))}
             </div>
@@ -189,6 +216,7 @@ const EmotionsPage = () => {
                         }}
                     >
                         <span className="card-emoji">{emotion.emoji}</span>
+                        <span className="card-name">{emotion.name}</span>
                     </button>
                 ))}
             </div>
@@ -214,6 +242,11 @@ const EmotionsPage = () => {
                         {breathPhase === 'inhale' && '🌬️'}
                         {breathPhase === 'hold' && '⏸️'}
                         {breathPhase === 'exhale' && '💨'}
+                    </span>
+                    <span className="breath-phase-label">
+                        {breathPhase === 'inhale' && 'Breathe In'}
+                        {breathPhase === 'hold' && 'Hold'}
+                        {breathPhase === 'exhale' && 'Breathe Out'}
                     </span>
                 </div>
             </div>

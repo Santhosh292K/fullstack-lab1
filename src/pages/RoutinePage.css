@@ -54,15 +54,17 @@
 }
 
 .routine-item {
-    width: 70px;
-    height: 70px;
+    width: 80px;
+    height: 80px;
     border: none;
     border-radius: var(--radius-md);
     background: var(--bg-card);
     cursor: pointer;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 2px;
     box-shadow: var(--shadow-soft);
     transition: all var(--transition-fast);
     position: relative;
@@ -79,7 +81,19 @@
 }
 
 .item-icon {
-    font-size: 2rem;
+    font-size: 1.8rem;
+}
+
+.item-label {
+    font-size: 0.55rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    text-align: center;
+    line-height: 1;
+    max-width: 72px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .item-check {
@@ -244,7 +258,14 @@
 }
 
 .activity-icon {
-    font-size: 6rem;
+    font-size: 5rem;
+}
+
+.activity-label {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--text-secondary);
+    margin-top: var(--space-xs);
 }
 
 .next-preview {

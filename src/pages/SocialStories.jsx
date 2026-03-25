@@ -134,6 +134,7 @@ const SocialStories = () => {
                         }}
                     >
                         <span className="story-icon">{story.icon}</span>
+                        <span className="story-title">{story.title}</span>
                         <div className="story-preview">
                             {story.slides.slice(0, 3).map((slide, i) => (
                                 <span key={i} className="preview-dot">{slide.icon}</span>
@@ -169,6 +170,7 @@ const SocialStories = () => {
                         <div className="slide-icon-wrapper">
                             <span className="slide-icon">{slide.icon}</span>
                         </div>
+                        <p className="slide-description">{slide.description}</p>
                     </div>
                 </div>
 

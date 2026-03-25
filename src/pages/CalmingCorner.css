@@ -46,8 +46,10 @@
     backdrop-filter: blur(10px);
     cursor: pointer;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 4px;
     box-shadow: var(--shadow-soft);
     transition: all var(--transition-fast);
     animation: bounce-in 0.4s ease-out backwards;
@@ -59,7 +61,15 @@
 }
 
 .scene-emoji {
-    font-size: 2rem;
+    font-size: 1.8rem;
+}
+
+.scene-name {
+    font-size: 0.55rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    text-align: center;
+    line-height: 1;
 }
 
 .timer-options {
@@ -93,14 +103,12 @@
     font-size: 1.8rem;
 }
 
-.timer-dots {
-    display: flex;
-    gap: 2px;
-    color: var(--primary);
-}
-
-.dot {
-    font-size: 1rem;
+.timer-option-label {
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: var(--primary-dark);
+    text-align: center;
+    line-height: 1;
 }
 
 .squeeze-button {
@@ -493,7 +501,16 @@
 }
 
 .timer-emoji {
-    font-size: 4rem;
+    font-size: 3rem;
+    display: block;
+}
+
+.timer-number {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--primary-dark);
+    display: block;
+    margin-top: 4px;
 }
 
 .timer-controls {

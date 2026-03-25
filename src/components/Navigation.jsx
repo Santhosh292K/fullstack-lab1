@@ -20,6 +20,7 @@ const Navigation = ({ currentView, onNavigate }) => {
                     aria-label={item.label}
                 >
                     <span className="nav-icon">{item.icon}</span>
+                    <span className="nav-label">{item.label}</span>
                     <span className="nav-indicator"></span>
                 </button>
             ))}

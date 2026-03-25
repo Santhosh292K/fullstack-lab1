@@ -13,7 +13,7 @@ class FeedbackPage extends Component {
             feedbackList: [],
             showQuiz: false,
             quizAnswers: {},
-            score: 0,
+            score: 0, 
             quizSubmitted: false
         };
 

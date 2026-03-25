@@ -75,7 +75,7 @@ const ScenarioPage = ({ locationId, onBack, customScenarios }) => {
     const goToNextScenario = () => {
         if (currentScenarioIndex < allScenarios.length - 1) {
             setCurrentScenarioIndex(prev => prev + 1);
-            resetScenario();
+            // resetScenario is called by the useEffect watching currentScenarioIndex
             setTimeout(() => setPhase('playing'), 300);
         } else {
             setShowScenarioList(true);

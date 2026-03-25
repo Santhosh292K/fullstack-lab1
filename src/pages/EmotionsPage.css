@@ -74,7 +74,15 @@
 }
 
 .menu-icon {
-    font-size: 3.5rem;
+    font-size: 3rem;
+}
+
+.menu-card-label {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    text-align: center;
+    line-height: 1.2;
 }
 
 .menu-dots {
@@ -83,11 +91,11 @@
 }
 
 .emotion-dot {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
 }
 
 .menu-subtitle {
-    font-size: 2rem;
+    font-size: 1.5rem;
     opacity: 0.7;
 }
 
@@ -158,8 +166,11 @@
     background: var(--bg-card);
     cursor: pointer;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 2px;
+    padding: 4px;
     box-shadow: var(--shadow-soft);
     transition: all var(--transition-fast);
     animation: bounce-in 0.4s ease-out backwards;
@@ -181,7 +192,15 @@
 }
 
 .choice-emoji {
-    font-size: 2rem;
+    font-size: 1.8rem;
+}
+
+.choice-name {
+    font-size: 0.5rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    text-align: center;
+    line-height: 1;
 }
 
 .match-feedback {
@@ -311,7 +330,16 @@
 }
 
 .breath-icon {
-    font-size: 4rem;
+    font-size: 3.5rem;
+}
+
+.breath-phase-label {
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: white;
+    text-align: center;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    margin-top: 4px;
 }
 
 .breath-progress {

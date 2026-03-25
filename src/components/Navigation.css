@@ -71,6 +71,23 @@
     transform: scale(1);
 }
 
+.nav-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    letter-spacing: 0.02em;
+    line-height: 1;
+    transition: color var(--transition-fast);
+}
+
+.nav-item.active .nav-label {
+    color: var(--primary-dark);
+}
+
+.nav-item:hover .nav-label {
+    color: var(--primary);
+}
+
 /* High contrast mode */
 .high-contrast .bottom-navigation {
     background: #000;

@@ -14,6 +14,10 @@ const Home = ({ onSelectLocation, onOpenParentMode, onOpenRewards, customScenari
                 </button>
                 <div className="logo">
                     <span className="logo-icon">🔁</span>
+                    <div className="logo-text">
+                        <span className="logo-title">Control &amp; Predict</span>
+                        <span className="logo-subtitle">What happens next?</span>
+                    </div>
                 </div>
                 <button
                     className="parent-mode-button"
@@ -43,6 +47,9 @@ const Home = ({ onSelectLocation, onOpenParentMode, onOpenRewards, customScenari
                                 <div className="location-icon" style={{ color: location.color }}>
                                     {location.icon}
                                 </div>
+                                <span className="location-name" style={{ color: location.color }}>
+                                    {location.name}
+                                </span>
                                 <div className="location-dots">
                                     {[...Array(Math.min(scenarioCount, 5))].map((_, i) => (
                                         <span
@@ -62,4 +69,3 @@ const Home = ({ onSelectLocation, onOpenParentMode, onOpenRewards, customScenari
 };
 
 export default Home;
-

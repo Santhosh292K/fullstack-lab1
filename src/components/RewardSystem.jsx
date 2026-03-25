@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useSettings } from '../context/SettingsContext';
 import './RewardSystem.css';
 
@@ -35,6 +35,10 @@ const RewardSystem = ({ isOpen, onClose }) => {
     const [showCelebration, setShowCelebration] = useState(false);
     const [celebrationSticker, setCelebrationSticker] = useState(null);
 
+    // Bug 2 fix: use a ref to track which milestones have been checked this session
+    // so we don't re-trigger addSticker on every render
+    const checkedMilestones = useRef(new Set());
+
     const earnedStickers = allStickers.filter(s =>
         progress.stickersEarned.includes(s.id)
     );
@@ -43,24 +47,25 @@ const RewardSystem = ({ isOpen, onClose }) => {
         !progress.stickersEarned.includes(s.id)
     );
 
-    // Check for new sticker unlocks based on progress
+    // Bug 2 fix: only call addSticker once per milestone using the ref guard
     useEffect(() => {
-        // Unlock achievements based on milestones
-        if (progress.scenariosCompleted >= 5 && !progress.stickersEarned.includes('achievement-star')) {
-            addSticker('achievement-star');
-            setCelebrationSticker(allStickers.find(s => s.id === 'achievement-star'));
-            setShowCelebration(true);
-        }
-        if (progress.scenariosCompleted >= 10 && !progress.stickersEarned.includes('achievement-trophy')) {
-            addSticker('achievement-trophy');
-        }
-        if (progress.emotionsRecognized >= 5 && !progress.stickersEarned.includes('achievement-heart')) {
-            addSticker('achievement-heart');
-        }
-        if (earnedStickers.length >= 10 && !progress.stickersEarned.includes('achievement-rainbow')) {
-            addSticker('achievement-rainbow');
-        }
-    }, [progress, addSticker, earnedStickers.length]);
+        const check = (condition, stickerId) => {
+            if (condition && !progress.stickersEarned.includes(stickerId) && !checkedMilestones.current.has(stickerId)) {
+                checkedMilestones.current.add(stickerId);
+                addSticker(stickerId);
+                if (stickerId === 'achievement-star') {
+                    setCelebrationSticker(allStickers.find(s => s.id === stickerId));
+                    setShowCelebration(true);
+                }
+            }
+        };
+
+        check(progress.scenariosCompleted >= 5, 'achievement-star');
+        check(progress.scenariosCompleted >= 10, 'achievement-trophy');
+        check(progress.emotionsRecognized >= 5, 'achievement-heart');
+        check(earnedStickers.length >= 10, 'achievement-rainbow');
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [progress.scenariosCompleted, progress.emotionsRecognized, earnedStickers.length]);
 
     if (!isOpen) return null;
 
@@ -100,10 +105,12 @@ const RewardSystem = ({ isOpen, onClose }) => {
                     <div className="progress-item">
                         <span className="progress-icon">🎯</span>
                         <span className="progress-value">{progress.scenariosCompleted}</span>
+                        <span className="progress-label">Scenarios</span>
                     </div>
                     <div className="progress-item">
                         <span className="progress-icon">😊</span>
                         <span className="progress-value">{progress.emotionsRecognized}</span>
+                        <span className="progress-label">Emotions</span>
                     </div>
                 </div>
             </div>
